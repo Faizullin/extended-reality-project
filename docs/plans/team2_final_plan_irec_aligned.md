@@ -3,19 +3,23 @@
 **Project:** Collaborative Fire-Evacuation Decision-Making in Virtual Reality: Analyst-Responder Communication, Navigation, and Workload
 **PI:** Dr. Syed Muhammad Umair Arif (SCAI) · **Team:** Zhandaulet Kuan, Botakoz Toleugaliyeva, Osman Faizulla, Adi Zhanserik
 **IREC submission:** 22 Sep 2026, expedited review (usually 3–4 weeks)
-**Plan written:** 25 Sep 2026
+**Plan written:** 25 Sep 2026 · **Revised:** 25 Sep 2026 to align with the Team Blueprint
 
 ---
 
 ## 0. Which document wins
 
-The **submitted IREC application** (`Team_2_.../Arif_IREC Application_09222026.md`) is the binding protocol. We may not collect or analyse participant data in any way it does not describe unless we file an amendment first.
+Documents rank in this order:
+
+1. **The IREC application** (`Team_2_.../Arif_IREC Application_09222026.md`) is binding. We may not collect or analyse participant data in any way it does not describe unless we file an amendment first.
+2. **The Team Blueprint** (`Team_2_.../Collaborative_Fire_Emergency_VR_Project_Blueprint.md`) is the team's design reference for scenarios, measures, architecture, protocol, analysis, and timeline. It is fully compatible with the IREC application, and this plan follows it.
+3. **This plan** records the concrete decisions the Blueprint leaves open (topology, voice stack, counterbalance size, metric definitions) and tracks the ethics-package fixes.
 
 The earlier AI-generated plans (CrisisLink Blueprint, `master_plan.md`, `technical_realization_guide.md`, and `session1`/`session2`/`session3_extensions`) described a **different study**: an adaptive-uncertainty interface compared across three conditions. They were **removed on 25 Sep 2026**. The tracked ones can be recovered from git commit `9d41477`. §3 and §7 record what was kept from them.
 
 The remaining companion files are:
 - [session3.md](session3.md): the course's project catalog. Our study derives from its "Project 2".
-- [team2_assets_and_references_requirements.md](team2_assets_and_references_requirements.md): what 3D assets, open-source models, and citations to find.
+- [team2_assets_and_references_requirements.md](team2_assets_and_references_requirements.md): what 3D assets, open-source components, and citations to find.
 
 ---
 
@@ -23,7 +27,6 @@ The remaining companion files are:
 
 | Item | Committed in IREC |
 | --- | --- |
-| Research questions | RQ1: How well does the Analyst guide an information-limited Responder to a safe route? RQ2: How do communication delay, jitter, clarification events, and perceived audio quality relate to evacuation time, route efficiency, errors, and route changes? RQ3: How do the scenarios affect workload and how participants rate the system? |
 | Design | Repeated-measures design with mixed methods. **The within-pair factor is the scenario**, not an interface condition. |
 | Hardware | **Two Meta Quest 2 headsets** connected over a local network. Both participants are in VR. |
 | Roles | The Analyst stays mostly stationary and has the map, fire/smoke sensors, hazard indicators, and exit status. The Responder navigates with no global map. **Each participant keeps the same role for the whole session.** |
@@ -34,11 +37,28 @@ The remaining companion files are:
 | Not collected | Video, biometrics, voice identification |
 | Instruments | Background questionnaire (once). **NASA-TLX + custom communication-quality questionnaire after each scenario.** SUS and open-ended feedback at the end. |
 | Survey medium | "Electronic survey media: **No**", so questionnaires are on paper |
-| Sample | About 30 participants (minimum 20, maximum 36), meaning **10–18 pairs**. Adults recruited from NU. |
-| Session | 50–60 min: consent 5–10, familiarization + practice 5–10, three scenarios 20–25, SUS + feedback about 5 |
+| Sample | About 30 participants (minimum 20, maximum 36), meaning **10–18 pairs** |
+| Session | 50–60 min |
 | Site / dates | Room 7.522. Data collection 10/2026–10/2027, only after approval. |
-| Analysis | Descriptive statistics, then within-pair comparisons at the pair level. Communication–outcome associations are **exploratory and not causal**. Themes from open-ended answers. |
-| Future work named in IREC | Deliberately manipulating communication quality is left to "a future approved protocol" |
+| Analysis | Pair-level within-pair comparisons. Communication–outcome associations are **exploratory and not causal**. Themes from open-ended answers. |
+
+### 1.1 Research questions & hypotheses (Team Blueprint §2, mapped to IREC)
+
+| Blueprint | Question | IREC RQ |
+| --- | --- | --- |
+| RQ1 | How effectively can the Analyst guide an information-limited Responder to a safe route? | RQ1 |
+| RQ2 | How does the type of coordination challenge (scenario) affect performance, navigation, and workload? | RQ2 + RQ3 |
+| RQ3 | How are measured delay/jitter and perceived communication quality associated with time, route errors, clarifications, and decision changes? | RQ2 |
+| RQ4 | How do Analyst and Responder differ in workload and communication experience? | RQ3 |
+| RQ5 | How usable is the complete system (SUS)? | RQ3 |
+
+- **H1:** Replanning (S2) and competing routes (S3) produce longer times and more communication events than the static baseline (S1).
+- **H2:** Higher delay/jitter is associated with more clarification or repetition and lower route efficiency *(associational only)*.
+- **H3:** Analyst and Responder workload profiles differ.
+- **H4:** Higher perceived communication quality is associated with higher confidence and better performance.
+- **H5:** The system is rated usable. This is evaluated descriptively through SUS.
+
+The Blueprint's RQs are a finer breakdown of the IREC RQs, so **no amendment is needed**.
 
 ---
 
@@ -48,10 +68,10 @@ The remaining companion files are:
 
 | # | Document | Problem | Fix |
 | --- | --- | --- | --- |
-| E1 | Participant consent | **It describes the old study.** Its title is "Adaptive Uncertainty Visualization…", it lists private/always-shared/adaptive conditions, a four-decision task (source, route, equipment, rescue), teleportation, and trust/shared-awareness/overload questionnaires. | Rewrite it to match the IREC application (see §7.1) |
-| E2 | Participant consent | It says "**Audio and video of participants will not be recorded**", but the IREC application (8.1, 8.2) and the recruitment email say audio **is** recorded. IREC 8.2 also says the consent form asks permission to record, and it does not. | Say audio is recorded and add an explicit checkbox for audio-recording consent |
-| E3 | Participant consent | Duration is 35–45 min where the IREC says 50–60 min. Location is "designated VR laboratory" where the IREC says Room 7.522. The risk section says teleportation "rather than continuous artificial movement", which is the opposite of the IREC. | Align duration, location, and locomotion wording. State that continuous locomotion carries a higher risk of motion sickness. |
-| E4 | Instruments | The **custom communication-quality questionnaire is missing**, although the application promises it after every scenario. | Draft it (see §6.4) and submit it |
+| E1 | Participant consent | **It describes the old study.** Its title is "Adaptive Uncertainty Visualization…", it lists private/always-shared/adaptive conditions, a four-decision task, teleportation, and trust/shared-awareness/overload questionnaires. | Rewrite it to match the IREC application (see §7.1) |
+| E2 | Participant consent | It says "**Audio and video of participants will not be recorded**", but the IREC application (8.1, 8.2), the recruitment email, and the Team Blueprint all say audio **is** recorded. IREC 8.2 also says the consent form asks permission to record, and it does not. | Say audio is recorded and add an explicit checkbox for audio-recording consent |
+| E3 | Participant consent | Duration is 35–45 min where the IREC says 50–60 min. Location is "designated VR laboratory" where the IREC says Room 7.522. It says teleportation instead of continuous locomotion. | Align duration, location, and locomotion wording, and state the higher risk of motion sickness |
+| E4 | Instruments | The **custom communication-quality questionnaire is not in the submission**, although the application promises it after every scenario | Format the 7 Blueprint items (§6.4) as `Arif_Communication Quality Questionnaire-Eng_<date>` and submit it |
 | E5 | Confidentiality agreement | It carries the old study title | Change it to the IREC title |
 
 ### 2.2 Minor: fix in the same revision
@@ -59,33 +79,29 @@ The remaining companion files are:
 | # | Where | Problem |
 | --- | --- | --- |
 | M1 | IREC §4.4 | Still says "uncertainty cues, and different information-sharing interfaces". Replace this with "asymmetric map/sensor vs. local information". |
-| M2 | Instrument filenames | Missing the language suffix. `Arif_NASA TLX_09222026` should be `Arif_NASA TLX-Eng_09222026`, and the same applies to the SUS, Background, and Feedback files. The checklist item "named according to protocol" is unticked. |
+| M2 | Instrument filenames | Missing the `-Eng` language suffix (NASA TLX, SUS, Background, Feedback). The checklist item "named according to protocol" is unticked. |
 | M3 | IREC Part 2 | PI's CITI completion date and NU ID are blank. The student-level checkbox is blank. |
-| M4 | Background questionnaire | There is no **eligibility screening** section, although §4.7 lists exclusions (seizures, vestibular disorders, severe motion sickness, feeling unwell today). Add a short yes/no screening checklist, either as a separate sheet or inside this questionnaire. |
-| M5 | Background questionnaire | Recommended addition: "How well do you know your partner?" (not at all / acquaintance / friend). Familiarity strongly affects communication, which RQ2 is about. Adding it now is cheap because the application is still under review. |
-| M6 | SUS / Feedback | SUS has a Participant ID but no Pair Code. Add Pair Code so the data can be joined. |
+| M4 | Background questionnaire | There is no **eligibility screening** section, although §4.7 lists exclusions. Add a short yes/no screening checklist. |
+| M5 | Background questionnaire | Add "How well do you know your partner?" and optionally "How often do you play video games?". The Blueprint §5 lists gaming/VR familiarity as a control variable. |
+| M6 | SUS / Feedback | SUS has no Pair Code. Add it. |
 | M7 | NASA-TLX | Says "after each experimental **condition**". Change it to "**scenario**". |
 
-**Action:** Send the PI one revision pack (E1–E5, M1–M7) this week, so it goes to IREC with the first round of reviewer comments or ahead of them.
+**Action:** Send the PI one revision pack (E1–E5, M1–M7) this week.
 
 ---
 
-## 3. Where the older plans conflict with the IREC protocol
+## 3. Where the removed AI plans conflict with the IREC protocol and the Team Blueprint
 
-| Topic | Blueprint | Master plan / Tech guide | IREC (binding) | **Decision** |
-| --- | --- | --- | --- | --- |
-| Independent variable | 3 interface conditions | 3 uncertainty-vis conditions | 3 scenarios | **Scenarios only** |
-| Analyst platform | Quest 2 | **PC desktop tabletop** | Quest 2 | **Quest 2** |
-| Locomotion | Teleport | Continuous + vignette | Continuous | **Continuous + vignette + snap turn** |
-| Task | 4 scored decisions | Route + SAGAT | Navigate to a safe exit | **Evacuation navigation** |
-| Speech | Not recorded | Word counts | **Recorded** | **Record audio on the server** |
-| Voice system | "No custom voice chat" | Not addressed | Needs timestamps and network logs | **Networked VoIP + probe logging (§5.4)** |
-| Fire | Static effects | Cellular-automata simulation | Scripted scenarios | **Deterministic scripted hazards** |
-| Crouch / soot / cough / O₂ | — | Yes | Not described | **Cut** |
-| SAGAT / Muir trust | — | Yes | Not described | **Cut** |
-| Questionnaires | Short in-VR | VRQuestionnaireToolkit | Paper | **Paper, headset off** |
-| Sample | 8–12 pairs | 36 pairs | 10–18 pairs | **Target 18, minimum 10** |
-| Unity | — | 2022.3 LTS *or* Unity 6 | — | **Unity 6 LTS** |
+| Topic | Old AI plans | IREC + Team Blueprint | **Decision** |
+| --- | --- | --- | --- |
+| Independent variable | 3 interface / uncertainty conditions | 3 scenarios | **Scenarios only** |
+| Analyst platform | PC desktop tabletop (tech guide) | IREC: two Quest 2. Blueprint: "2D/VR map". | **Quest 2** (IREC wins) |
+| Locomotion | Teleport (CrisisLink) | Continuous + snap turn | **Continuous + vignette + snap turn** |
+| Speech | Not recorded | Recorded, with timestamps | **Record + timestamp** |
+| Fire | Cellular-automata simulation | Scripted triggers (time, location, or waypoint) | **Deterministic scripted hazards** |
+| Crouch / O₂ / SAGAT / Muir trust | Yes | Not described | **Cut** |
+| Questionnaires | In-VR toolkit | Paper (IREC) | **Paper, headset off** |
+| Unity | 2022.3 or Unity 6 | "Unity" | **Unity 6 LTS** |
 
 ---
 
@@ -93,23 +109,27 @@ The remaining companion files are:
 
 | ID | Decision | Rationale |
 | --- | --- | --- |
-| D1 | **Build exactly the IREC study.** Three scenarios, fixed roles, communication-focused metrics. No interface conditions. | Anything else needs an amendment and puts approval at risk |
-| D2 | **The adaptive-uncertainty study becomes future work**, filed later as an amendment or follow-up protocol | The IREC itself leaves manipulation to "a future approved protocol" |
-| D3 | **Uncertainty survives as fixed content.** The Analyst's sensor panel always shows sensor age and confidence. S3 depends on a stale or faulty sensor that contradicts what the Responder sees. | Matches IREC S3: "sensor information and the Responder's local observations must be combined". This keeps the core idea without adding a condition. |
-| D4 | **Topology: the experimenter PC is a dedicated server** (not a player), with both Quests as clients | Logs, audio, and experimenter controls live on one machine, so files never need to be pulled off the headsets. Roles are assigned explicitly rather than by connection order. |
-| D5 | **Use a dedicated offline Wi-Fi router**, not NU campus Wi-Fi | Campus Wi-Fi commonly isolates clients from each other. Latency on our own router is also repeatable. |
-| D6 | **Voice runs over the LAN through our own networking stack.** Default choice is Dissonance Voice Chat with its Netcode for GameObjects integration. The fallback is a custom PCM relay. Cloud voice (Vivox, Photon) is ruled out because of D5. | We need offline operation, server-side recording, and timestamps |
-| D7 | **Separate the participants acoustically.** Use a partition in 7.522, or opposite corners, with each Quest wired to over-ear headphones. | If they can hear each other directly, the "communication channel" metrics mean nothing |
-| D8 | **Scripted, deterministic hazards.** S2's hazard fires when the Responder reaches a specific decision node (with a time fallback). No fire simulation. | Every pair must get the same scenario |
-| D9 | **Analyst sees the Responder only at zone level**, as a marker that updates on zone entry, never a live dot | A live dot turns the task into map-following. Zone-level position keeps verbal description necessary for RQ1 and RQ2. *Confirm with PI (Q1).* |
-| D10 | **No death or fail screens.** A hazard zone blocks the Responder with a short "Too hot / blocked" message and a push-back, and it is logged as an unsafe attempt. Each scenario has a **5-minute cap**. | Keeps stress minimal as promised to IREC and keeps sessions within 50–60 min |
-| D11 | **Comfort settings:** continuous move at about 1.5 m/s (tune in pilot, then fix for all sessions), tunneling vignette, 30° snap turn, Responder may sit in a swivel chair, Analyst sits | IREC promises moderate speed and snap turning |
-| D12 | **Paper questionnaires with the headset off** between scenarios. This doubles as the break. | IREC says there is no electronic survey |
-| D13 | **Target 18 pairs** (the IREC maximum of 36 participants), which gives a complete 6-order counterbalance (§6.3). Minimum 10 pairs. | 3! = 6 orders × 3 pairs each |
-| D14 | **Roles are assigned at random** (coin flip) per pair and recorded in session metadata | IREC does not specify, so randomizing is the defensible choice |
-| D15 | **Stack:** Unity 6 LTS, URP, OpenXR (Meta Quest feature), XR Interaction Toolkit 3.x, Netcode for GameObjects 2.x, Unity Transport, TextMeshPro. Pin exact versions in `ProjectVersion.txt` and `manifest.json` on day one. | Unity 2022.3 LTS is out of mainstream support, and the tech guide's manifest pins 2022-era packages |
-| D16 | **Custom CSV logger on the server.** Drop UXF. | UXF's per-participant session model does not fit a server-authoritative pair session |
-| D17 | **Keep the tech guide's code-structure rules:** `Assets/_Project/`, `.asmdef` per module, a pure-C# `Domain` assembly with EditMode tests | Metric math (route efficiency, wrong turns, jitter) must be unit-tested because it produces the results |
+| D1 | **Build exactly the IREC and Blueprint study.** Three scenarios, fixed roles, communication-focused metrics. | Anything else needs an amendment |
+| D2 | **The adaptive-uncertainty study becomes future work** (amendment or new protocol) | The IREC and Blueprint both say a causal communication study needs a separate manipulation |
+| D3 | **Uncertainty survives as fixed content.** The Analyst's sensor panel always shows sensor age and status. In S3, one sensor is stale and the Responder's local view contradicts it. | Matches Blueprint S3: "the Analyst may benefit from the Responder's local observations" |
+| D4 | **Topology: the experimenter PC is a dedicated server** (not a player), with both Quests as clients | One authoritative clock, as the Blueprint requires. All logs and audio live on one machine. Roles are set from the console. |
+| D5 | **Use a dedicated offline Wi-Fi router**, not NU campus Wi-Fi | Campus Wi-Fi commonly isolates clients from each other. Latency is repeatable. |
+| D6 | **The voice stack must expose per-frame sequence ID + send timestamp + receive/playback timestamp** (Blueprint §11). Two paths are spiked in W1–W2: (a) a custom Opus/PCM relay over our networking layer, or (b) a LAN voice library with packet hooks. Choose the one that meets this criterion. If neither meets it, fall back to ping probes (§5.4). Cloud voice is ruled out (D5). | Frame-level timing is the Blueprint's intended metric |
+| D7 | **Separate the participants acoustically**: a partition or separate corners, with wired over-ear headphones on each Quest | If they can hear each other directly, the channel metrics mean nothing |
+| D8 | **Scripted, deterministic hazards.** S2's hazard fires at a waypoint (with a time fallback). | Every pair gets the same scenario |
+| D9 | **The Analyst sees the Responder at zone level only.** The Blueprint leaves this as "if intended". *Confirm with PI (Q1).* | A live dot turns the task into one-way GPS, which is the Blueprint's "one participant dominates" risk |
+| D10 | **No fail screens.** Hazard zones block the Responder and log an unsafe attempt. **Task cap: 5 min** inside a 5–8 min trial slot (Blueprint §14). A timeout is recorded as unsuccessful. | Minimal stress, and sessions stay within 50–60 min |
+| D11 | **Comfort settings:** continuous move at about 1.5 m/s (tune in pilot, then fix), conservative acceleration, tunneling vignette, 30° snap turn. Responder may sit in a swivel chair. Analyst sits. | IREC and Blueprint |
+| D12 | **Paper questionnaires with the headset off** | IREC says there is no electronic survey |
+| D13 | **Counterbalance with the cyclic 3-order Latin square** (Blueprint §5): target **15 pairs, 5 per order**. If recruitment goes up to 18 pairs, add 1 pair per order. | Follows the Blueprint and the IREC's 30-participant target |
+| D14 | **Roles are randomly assigned** from a pre-generated schedule | Blueprint §3 |
+| D15 | **Stack:** Unity 6 LTS, URP, OpenXR (Meta Quest feature), XRI 3.x, Netcode for GameObjects 2.x, Unity Transport, TextMeshPro. Pin versions on day one. | Unity 2022.3 is out of mainstream support |
+| D16 | **Custom server-side CSV logger** with the Blueprint's data dictionary (Appendix A) | Blueprint §12 |
+| D17 | **Code structure:** `Assets/_Project/`, an `.asmdef` per module, a pure-C# `Domain` assembly with EditMode tests for metric math | Metrics produce the results, so they must be tested |
+| D18 | **Primary outcomes, frozen now** (Blueprint risk "too many outcomes"): **completion time, route efficiency, wrong turns** (pair level), with **evacuation success** reported descriptively. Everything else is secondary or exploratory. | Blueprint §18 |
+| D19 | **The Analyst UI never shows a computed safe route.** It shows only map, exits, sensor and hazard states, and alerts. | Blueprint §9: "provide information, not solve the experiment" |
+| D20 | **Always-on voice (open mic) for all pairs**, with server-side voice-activity detection producing speech start/end events | The Responder's hands are busy with locomotion. Behaviour is identical for all pairs (Blueprint §9). |
+| D21 | **Researcher discipline:** a written instruction script, no coaching during trials, and a predefined restart / invalid-trial rule (§6.2) | Blueprint §14 |
 
 ---
 
@@ -118,11 +138,11 @@ The remaining companion files are:
 ### 5.1 Topology
 
 ```
-      [Experimenter PC]  ── dedicated NGO server, not a player
-        ├─ Experimenter console: pair code, role assignment, scenario order, start/stop/abort
-        ├─ Authoritative scenario state, hazard triggers, scoring
-        ├─ Logger: events.csv, pose.csv, net.csv, session.json
-        └─ Voice listener → per-trial stereo WAV (L = Analyst, R = Responder)
+      [Experimenter PC]  ── dedicated NGO server, the authoritative clock
+        ├─ Experimenter console: pair, participant codes, roles, order, start/stop/abort/pause
+        ├─ ScenarioManager + SensorManager (authoritative), scoring
+        ├─ EventLogger: events.csv, pose.csv, voice_frames.csv, net.csv, trial_summary.csv, session.json
+        └─ VoiceManager relay → per-trial stereo WAV (L = Analyst, R = Responder) + VAD events
                │  dedicated offline router (5 GHz)
      ┌─────────┴─────────┐
  [Quest A: Analyst]   [Quest B: Responder]
@@ -130,188 +150,206 @@ The remaining companion files are:
  wired headphones      wired headphones
 ```
 
-### 5.2 Roles in VR
+### 5.2 Unity components (Blueprint §13)
 
-**Analyst (Quest A, seated)**
-- Sits in a virtual control room with one large world-space map panel: floor plan, exits (open/blocked), and sensor icons (smoke/heat, value, **age**, confidence).
-- A hazard alert feed shows timestamped updates. These drive S2.
-- The Responder appears as a highlighted zone, updated on zone entry (D9).
-- Interaction is minimal: a ray hover shows sensor details. Hovers are logged as interaction events.
-- Text must be legible on Quest 2. Test on device in week 1. Use colour together with icons and labels.
+| Component | Runs on | Responsibility |
+| --- | --- | --- |
+| `ExperimentManager` | Server | Pair and participant IDs, role, scenario order, trial state machine |
+| `ScenarioManager` | Server | Loads the scenario SO, hazards, exits, triggers, success/timeout |
+| `SensorManager` | Server → Analyst | Sensor states, update timestamps, "new change" flags |
+| `ResponderController` | Quest B | Locomotion, turning, collisions, position reporting |
+| `AnalystUIController` | Quest A | Map, sensor panel, alert feed, zone marker, hover logging |
+| `VoiceManager` | All | Capture, send, relay, playback. Frame seq/timestamps, recording, VAD. |
+| `NetworkManager` (NGO) | All | Connection, state sync, role-based spawning |
+| `EventLogger` | Server | One schema, all files, a trial summary at trial end |
+| `TrialController` | Server | Practice → S_a → pause → S_b → pause → S_c. Links each trial to the paper questionnaire sheet ID. |
 
-**Responder (Quest B)**
-- First-person view in the facility, with no map and no path guidance. **Guidance comes only by voice.**
-- Can see local cues: smoke, fire glow, debris, exit signs, and door states.
-- Uses continuous move, vignette, and snap turn (D11).
-- Reaching an open, safe exit ends the trial with success.
+### 5.3 Roles in VR
 
-### 5.3 Scenarios
+**Analyst (Quest A, seated):** a virtual control room with a large map (rooms, corridors, exits open/blocked, sensor icons with ID, status, and **age**), a sensor panel with "newly changed" highlighting, and an alert feed for S2. The Responder appears as a zone-level highlight (D9). There is no computed route (D19). Sensor hovers and alert acknowledgements are logged.
 
-All scenarios use one building shell. Each scenario has its own start point, exit set, and hazard placement, with **optimal safe-path lengths within ±15% of each other**. The practice task uses a separate small hazard-free area.
+**Responder (Quest B):** a first-person view with no map, no arrows, and no minimap. Local cues are smoke, fire glow, debris, signage, and landmarks. Goal: reach a safe exit while communicating. Local feedback appears only for usability (a blocked message), never as decision support.
 
-| Scenario | Setup | What the team must do | Key logged moment |
+### 5.4 Scenarios
+
+All scenarios have matched physical demand: optimal safe path **40–60 m, within ±15%**, the same number of decision points, and comparable visual complexity. Each uses a **different layout variant** (rotated or reconfigured) to reduce memory effects. The practice task uses a separate hazard-free area.
+
+| Scenario | Setup | Coordination challenge | Scenario-specific measures |
 | --- | --- | --- | --- |
-| Practice | Small area with one exit and no hazards | Analyst guides Responder to the exit | — |
-| S1 Blocked Primary Exit | Nearest exit is blocked by smoke/fire. Analyst's exit status shows it. | Analyst routes Responder to an alternative exit | First wrong turn toward the blocked exit |
-| S2 Dynamic Hazard Update | Initial route is safe. When the Responder reaches node *Nₖ*, a sensor alert fires for the segment ahead. The visual hazard appears only when the Responder gets close. | Analyst notices the alert, interrupts the plan, and redirects | `t_update` → `t_route_change` (reaction latency) |
-| S3 Competing Routes | Three routes. Sensors favour route A, but one sensor on A is stale or low-confidence. The Responder sees smoke on A. Route B is safe. Route C is safe but longer. | Combine the sensor readings with the Responder's report and choose B | Whether and when the Responder's observation is reported, and the route chosen |
+| S1 Blocked Primary Exit | Responder starts in an office or lab area. The direct route is blocked by fire/smoke. The Analyst's map shows the blocked route **and one viable alternative**. | One-way directional guidance and route following | Instructions count, clarifications, wrong turns |
+| S2 Dynamic Hazard Update | The Analyst picks an initially safe route. When the Responder reaches **waypoint Wₖ**, a new smoke/fire event makes the route ahead unsafe. The Analyst's display updates immediately. The Responder receives the update only by voice. | Detect the update, interrupt the old plan, reroute | **Replanning time** (`hazard_update` → `route_change`), reversals, **unsafe approach distance**, decision changes |
+| S3 Competing Routes | From a central junction there are three routes. **A:** short, but the sensor on it is stale, and the Responder sees smoke at the entrance (only the Responder knows). **B:** longer and clearly safe. **C:** looks clear from the junction, but the Analyst's map shows a downstream blockage (only the Analyst knows). | **Two-way exchange.** Neither partner can pick B alone. | **Junction decision time**, communication turns, chosen route, route changes |
 
-Scenario definitions live in ScriptableObjects (as in the Blueprint): nodes, edges, exits, hazards, triggers, and the optimal path.
+**Next step (Blueprint §20):** write a one-page spec for each scenario using Blueprint Appendix B, with a map sketch, before implementing. Then implement S1 end to end before building S2 and S3.
 
-### 5.4 Communication measurement (RQ2)
+### 5.5 Communication measurement (Blueprint §11)
 
-| Metric | How it is collected |
-| --- | --- |
-| Network delay | The server sends `Ping(seq, t_send)` to each client every 500 ms and the client echoes it immediately. RTT is logged to `net.csv`, with one-way delay estimated as RTT/2. |
-| Jitter | RFC 3550-style smoothed mean deviation of successive delay samples, per trial and per client. Computed in `Domain` and unit-tested. |
-| Voice-pipeline latency | A **one-off calibration with no participants**: clap/loopback test, repeated 20 times, measuring mouth-to-ear delay through the whole stack. Reported as a system characteristic. |
-| Packet loss / dropouts | Gaps in the ping sequence, plus voice-library statistics if the library exposes them |
-| Clarification events | **Manually coded from the audio** using the codebook in §6.5. Two coders double-code about 20% of trials, and Cohen's κ is reported. |
-| Perceived quality | Custom questionnaire (§6.4) |
+Network-level measures, conversational measures, and perceived measures are **kept separate and never relabelled as each other**.
+
+| Level | Metric | How it is collected |
+| --- | --- | --- |
+| Transport | Audio latency (mean/median/p95) | Per voice frame: `seq`, `t_send` (sender, in server time via NGO time sync), `t_recv` and `t_play` (receiver). Stored in `voice_frames.csv`. |
+| Transport | Jitter | RFC 3550 interarrival jitter over frames, per trial and direction. Computed in `Domain` and unit-tested. |
+| Transport | Frame loss / interruptions | Gaps in `seq`, and playback buffer underruns |
+| Transport (fallback / supplement) | RTT probes | Server ↔ client ping every 500 ms → `net.csv` |
+| Transport (calibration) | Mouth-to-ear delay | One-off clap/loopback test ×20 with no participants. Reported as a system characteristic. |
+| Conversation | Speaking turns, response interval | VAD speech start/end per channel. Response interval = end of one partner's utterance → start of the other's reply. **This is human timing, not network latency.** |
+| Conversation | Clarifications, repetitions, corrections | Manual coding from audio (§6.5). About 20% double-coded, with Cohen's κ reported. |
+| Perceived | Communication quality | Questionnaire (§6.4) |
 
 We do **not** inject artificial latency. That would be a manipulation the IREC does not cover.
 
-### 5.5 Logging schema (server, coded IDs only)
+### 5.6 Logging (Blueprint §12 + Appendix A)
 
-- `session.json`: pair code, participant codes, role assignment, scenario order, build hash, move speed, router channel, start time
-- `events.csv`: `t_server, pair, scenario, event, actor, arg1, arg2`
-  - Events: `trial_start/end`, `zone_enter`, `node_pass`, `wrong_turn`, `unsafe_attempt`, `blocked_exit_attempt`, `hazard_update`, `route_change`, `sensor_hover`, `exit_reached`, `timeout`, `abort`
-- `pose.csv`: Responder position and heading at 10 Hz (needed for the movement path and route length)
-- `net.csv`: `t_server, client, seq, rtt_ms`
-- `audio/<pair>_<scenario>.wav`: stereo, with the start time recorded in `events.csv`
+Every row carries `pair_id, scenario, trial_no, timestamp_ms` (server clock). Participant-level files add `participant_id, role`.
 
-**Never** type names or student IDs into the system. The code-to-identity link stays on paper in the locked cabinet.
+- `session.json`: pair, participant codes, roles, scenario order, build hash, move speed, router channel
+- `events.csv`: `trial_start/end`, `hazard_update`, `exit_reached`, `timeout`, `unsafe_zone_entry`, `blocked_route_attempt`, `junction_entered`, `route_choice`, `route_change`, `wrong_turn`, `analyst_hover`, `alert_ack`, `vad_start/end`, `pause`, `stop`, `adverse_discomfort`, `invalid_trial`, with `target_or_zone` and `value` (e.g., `safe->blocked`) columns
+- `pose.csv`: Responder position at 10 Hz
+- `voice_frames.csv`, `net.csv`: transport timing (§5.5)
+- `trial_summary.csv`, **written automatically at trial end**: completion_time_s, success, distance_m, route_efficiency, wrong_turns, blocked_attempts, unsafe_entries, route_changes, replanning_time_s (S2), junction_decision_s (S3), speaking_turns, audio_latency_ms_mean/p95, audio_jitter_ms, frame_loss_pct
+- `audio/<pair>_<scenario>.wav`
 
-### 5.6 Operational metric definitions (freeze before pilot)
+Coded IDs only. No names are ever typed into the system.
+
+### 5.7 Operational metric definitions (freeze before pilot)
 
 | Metric | Definition |
 | --- | --- |
-| Evacuation success | Reached an open, safe exit before the 5-minute cap |
-| Completion time | `trial_start` → `exit_reached` (capped value on timeout) |
-| Route efficiency | `L_optimal / L_actual` (0–1). `L_actual` comes from `pose.csv`. |
-| Wrong turn | At a decision node, entering an edge that is not on any safe route to an open exit |
-| Unsafe attempt | Entering a hazard trigger volume |
-| Blocked-exit attempt | Reaching within 2 m of a blocked exit door |
-| Route change | Responder reverses direction on an edge, or their target exit (inferred from the next two nodes) changes |
-| S2 reaction latency | `hazard_update` → first `route_change` away from the hazard segment |
+| Evacuation success | Reached an open, safe exit within the 5-min cap |
+| Completion time | `trial_start` → `exit_reached`. Timeout = 300 s, and success = 0. |
+| Route efficiency | `L_optimal / L_actual` (0–1). The inverse is tortuosity. |
+| Wrong turn | At a junction, entering an edge not on any safe route to an open exit |
+| Unsafe entry | Entering a hazard trigger volume |
+| Blocked-route attempt | Coming within 2 m of a blocked door or debris |
+| Route change | Reversal on an edge, or a change of the inferred target exit |
+| Replanning time (S2) | `hazard_update` → first `route_change` away from the hazard |
+| Unsafe approach distance (S2) | Minimum Responder distance to the new hazard after `hazard_update` |
+| Junction decision time (S3) | `junction_entered` at the central junction → leaving it on a chosen route |
 
 ---
 
 ## 6. Study protocol details
 
-### 6.1 Session run sheet (about 55 min)
+### 6.1 Session run sheet (Blueprint §14, about 55–60 min)
 
-1. Arrival, screening checklist, consent including the audio checkbox, codes assigned, coin flip for roles, background questionnaire (10)
-2. Fit headsets and headphones, then tutorial and practice (10)
-3. Scenario 1 → headset off, TLX + communication questionnaire (~8)
-4. Scenario 2 → headset off, same questionnaires (~8)
-5. Scenario 3 → headset off, same questionnaires (~8)
-6. SUS + open-ended feedback, discomfort check, thanks (5–8)
+| Stage | Time |
+| --- | --- |
+| Welcome, screening, consent (including the audio checkbox), codes, role from the schedule, background questionnaire | 5–8 |
+| Role-specific tutorial (Analyst: map and sensors. Responder: movement.) | 5 |
+| Practice trial (verify movement + voice) | 4–6 |
+| Scenario A → headset off, TLX + communication questionnaire, rest | 5–8 + 3–5 |
+| Scenario B → same | 5–8 + 3–5 |
+| Scenario C → TLX + communication, then SUS + open-ended feedback | 5–8 + 6–10 |
+| Completion: file-integrity check, comfort check, backup | 2–3 |
 
-### 6.2 Physical setup (Room 7.522)
-- Partition or maximum separation. Wired over-ear headphones on both Quests.
-- Responder area of at least 2×2 m, clear, with a swivel chair available.
-- Experimenter PC and router on a table. One researcher watches each participant.
-- Wipes and face covers for hygiene. Headsets fully charged, with a spare battery pack.
+### 6.2 Physical setup & researcher rules
+- Partition or maximum separation in 7.522. Wired over-ear headphones. A clear Responder area of at least 2×2 m with a swivel chair. One researcher watches each participant.
+- Use the written script for all instructions. **No coaching during trials.**
+- **Restart rule:** a technical failure (disconnect, crash, voice loss > 10 s) in the first 60 s means restart with the same scenario. After that, mark the trial `invalid_trial` and continue. A participant's discomfort stop ends the session. Log it as `adverse_discomfort` and follow the IREC adverse-event procedure.
 
-### 6.3 Counterbalancing (18 pairs)
+### 6.3 Counterbalancing (D13)
 
-| Order | Sequence | Pairs |
-| --- | --- | --- |
-| O1 | S1 S2 S3 | 3 |
-| O2 | S1 S3 S2 | 3 |
-| O3 | S2 S1 S3 | 3 |
-| O4 | S2 S3 S1 | 3 |
-| O5 | S3 S1 S2 | 3 |
-| O6 | S3 S2 S1 | 3 |
+| Order | Trial 1 | Trial 2 | Trial 3 | Pairs (15-pair target) |
+| --- | --- | --- | --- | --- |
+| A | S1 | S2 | S3 | 5 |
+| B | S2 | S3 | S1 | 5 |
+| C | S3 | S1 | S2 | 5 |
 
-If recruitment stops early, finish the current block of 6 or use the three Latin-square orders O1/O4/O5. Pre-generate the assignment list before the first session.
+Pre-generate the order and role schedule before the first session. Pairs 16–18 (if recruited) get one each of A, B, C.
 
-### 6.4 Draft: Communication Quality Questionnaire (to submit as `Arif_Communication Quality Questionnaire-Eng_<date>`)
+### 6.4 Communication Quality Questionnaire (Blueprint §6, 5-point agreement)
 
-The header matches the TLX: participant code, pair code, role, scenario. Items use a 5-point scale (1 = strongly disagree … 5 = strongly agree).
+The header matches the TLX: participant code, pair code, role, scenario.
 
-1. I could hear my partner clearly.
-2. I noticed a delay between when my partner spoke and when I heard them. *(R)*
-3. The audio cut out, stuttered, or was interrupted. *(R)*
-4. I had to ask my partner to repeat or clarify information. *(R)*
-5. I understood my partner's instructions or descriptions without difficulty.
-6. I was able to convey the information I wanted to my partner.
-7. Overall, communication with my partner during this scenario was effective.
+1. I could clearly understand my partner throughout the scenario.
+2. The communication delay made coordination difficult. *(R)*
+3. Audio interruptions or instability affected our decisions. *(R)*
+4. I often needed my partner to repeat or clarify information. *(R)*
+5. Communication was fast enough for the emergency task.
+6. I was confident that my partner understood the information I communicated.
+7. Overall, our communication was effective during this scenario.
 
-Score = mean after reversing the *(R)* items. Report per-item results too, because the scale is not validated.
+Score = mean after reversing the *(R)* items. Also report per item, because the scale is not validated. Item 6 serves as the "confidence" measure for H4.
 
-### 6.5 Communication event codebook (for audio coding)
+### 6.5 Communication event codebook (audio coding)
 
 | Code | Definition |
 | --- | --- |
 | CLR | Clarification request ("which door?", "say again") |
 | REP | Instruction repeated without being asked |
 | COR | Correction of a previous instruction or report |
-| OBS | Responder reports a local observation (smoke, blocked, sign) |
-| CNF | Explicit confirmation ("ok, turning left") |
-| BRK | Breakdown: overlapping speech or instruction lost, needing recovery |
+| OBS | Responder reports a local observation |
+| CNF | Explicit confirmation |
+| BRK | Breakdown: overlap or lost instruction needing recovery |
 
-### 6.6 Analysis plan
-- The unit of analysis is the **pair** for task outcomes, and the **participant nested in pair** for TLX, communication questionnaire, and SUS, reported by role.
-- Scenario effects on outcomes: Friedman test (n ≤ 18 pairs), or a linear mixed model with pair as a random intercept if assumptions hold. Report effect sizes and confidence intervals.
-- RQ2: mixed model or repeated-measures correlation between communication metrics (jitter, CLR count, questionnaire score) and outcomes (time, efficiency, errors). **Label it exploratory and associational**, as promised to IREC.
-- Open-ended answers: thematic grouping (navigation, communication, interface, discomfort).
+### 6.6 Analysis plan (Blueprint §15)
+- **Pair level (n ≈ 15):** compare completion time, route efficiency, and wrong turns (primary), plus distance, blocked/unsafe attempts, route changes, and communication counts (secondary), across scenarios. Use repeated-measures ANOVA if assumptions hold, otherwise Friedman. Use linear mixed models (random intercept for pair) for richer models. Report effect sizes and confidence intervals.
+- **Scenario-specific:** S2 replanning time and unsafe approach distance. S3 junction decision time and whether the chosen route was safe and efficient.
+- **Individual level:** TLX and communication ratings by scenario × role (participant nested in pair). SUS descriptive, **item-level** included.
+- **RQ3 / H2 / H4:** repeated-measures correlations or mixed models between latency/jitter, conversation counts, perceived quality, and outcomes. Label these **associational**.
+- **Qualitative:** themes from open-ended answers (usability, navigation, realism, communication, discomfort).
+
+### 6.7 Pilot (Blueprint §16)
+- **Internal pilot** (team members, unpublished) as soon as S1 runs end to end. Then **2–3 pilot pairs**. *Confirm with PI whether non-team volunteers need to wait for approval (Q6).*
+- Check technical stability, scenario fairness (no shortcuts), instruction clarity, locomotion comfort, logging completeness, questionnaire timing, and ceiling/floor effects (S1 not trivial, S3 not impossible).
+- **Pass criterion:** from one pilot pair's files alone, the team can reconstruct the full trial story (route, hazard changes, communication problems, decision times, ratings).
 
 ---
 
 ## 7. What to keep from the older plans and what to cut
 
-**Keep:** Blueprint scope discipline, grey-box first, the two-headsets-first milestone, discrete event logging, server-authoritative state, ScriptableObject scenarios, scenario-matching rules, readability/accessibility rules, and the risk table. From the tech guide: `_Project/` isolation, asmdefs, pure-C# Domain assembly with tests, Quest 2 performance budget (72 Hz, ≤150 draw calls), continuous move with vignette. From the master plan: the tortuosity idea (our route efficiency is its inverse) and sensor-staleness badges (D3).
+**Keep:** grey-box first, the two-headsets-first milestone, server-authoritative state, ScriptableObject scenarios, `_Project/` isolation, asmdefs, pure-C# Domain assembly with tests, Quest 2 performance budget (72 Hz, ≤150 draw calls), continuous move with vignette, sensor-staleness badges (D3), the tortuosity idea (the inverse of route efficiency).
 
-**Cut:** Interface conditions and the adaptive cue engine, bifurcated path rays, the cellular-automata fire simulation, crouch/soot/cough/oxygen mechanics, SAGAT, Muir trust scale, in-VR questionnaires, UXF, the PC tabletop Analyst, teleportation, four-decision scoring, and multiple facility types.
-
-**Tech-guide code to fix before reusing it:**
-- `NetworkRoleManager` subscribes to `ConnectionApprovalCallback` inside `OnNetworkSpawn`. Approval must be enabled and wired **before** `StartServer()`. It also assigns roles by connection order, which is replaced by the experimenter console (D4).
-- `RoomDefinition` uses `init` accessors. Unity needs an `IsExternalInit` shim for these, or plain setters.
-- The manifest pins 2022.3-era packages, which conflicts with D15.
+**Cut:** interface conditions, adaptive cue engine, bifurcated path rays, cellular-automata fire, crouch/soot/cough/O₂, SAGAT, Muir trust, in-VR questionnaires, UXF, PC tabletop Analyst, teleportation, four-decision scoring, NPC workers.
 
 ### 7.1 Rewritten consent form: required contents
-Include: IREC title; Room 7.522; 50–60 min; pairs with fixed Analyst/Responder roles, both in Quest 2; three fire-evacuation scenarios plus practice; continuous locomotion with its motion-sickness risk and mitigations; **audio of the communication channel recorded, stored under codes, never published, deleted after the retention period**; automatic logs (path, times, route events, network timing); questionnaires (background, NASA-TLX, communication quality, SUS, feedback). Keep: no video or biometrics, voluntary participation, withdrawal and data-removal rules, contacts. Add a checkbox: "I agree to audio recording of my communication during the VR tasks (required for participation)."
+Include: IREC title; Room 7.522; 50–60 min; pairs with fixed randomly assigned roles, both in Quest 2; practice + three fire-evacuation scenarios; continuous locomotion with its motion-sickness risk and mitigations; **audio of the voice channel recorded, stored under codes, never published, deleted after the retention period**; automatic logs (path, times, route events, voice and network timing); questionnaires (background, NASA-TLX + communication quality after each scenario, SUS + feedback at the end). Keep: no video or biometrics, voluntary participation, withdrawal and data-removal rules, contacts. Add a checkbox: "I agree to audio recording of my communication during the VR tasks (required for participation)."
 
 ---
 
 ## 8. TODO
 
-### Now (week of 28 Sep): ethics revision pack
+### Ethics revision pack (week of 28 Sep)
 - [ ] Rewrite the participant consent form (E1–E3, §7.1)
-- [ ] Draft and format the Communication Quality Questionnaire (E4, §6.4)
+- [ ] Format the Communication Quality Questionnaire from the Blueprint items (E4, §6.4)
 - [ ] Fix the confidentiality agreement title (E5)
-- [ ] Add a screening checklist and the "know your partner" item (M4, M5). Add Pair Code to the SUS and Feedback forms (M6). Change "condition" to "scenario" in the TLX (M7).
-- [ ] Rename the instrument files with `-Eng` (M2). Fix §4.4 wording (M1). Get the PI to fill in the CITI date and NU ID (M3).
-- [ ] Send the pack to Dr. Arif for forwarding to resethics@nu.edu.kz
-- [ ] Ask the PI the open questions in §9
+- [ ] Screening checklist, background additions, SUS Pair Code, TLX wording (M4–M7)
+- [ ] Rename instrument files with `-Eng`. Fix §4.4 wording. PI fills in the CITI date and NU ID (M1–M3).
+- [ ] Send the pack to Dr. Arif for forwarding to resethics@nu.edu.kz. Ask the questions in §9.
 
-### Technical (tech weeks 1–5, before approval)
-- [ ] **W1:** Unity 6 LTS project, `_Project/` layout, asmdefs, Git LFS, pinned packages. Quest 2 build working. **Milestone: PC server + 2 Quests on the dedicated router, roles assigned from the console, one synced state.**
-- [ ] **W1 spike:** Voice over LAN with the chosen library: two Quests talking, server records a stereo WAV, ping probe logging to `net.csv`. If it is not working by the end of W2, fall back to a custom PCM relay.
-- [ ] **W2:** Grey-box building shell, tutorial area, continuous move + vignette + snap turn, zone/node triggers
-- [ ] **W3:** Analyst control room (map, exits, sensors with age/confidence, alert feed, zone marker). Scenario ScriptableObjects. Experimenter console (pair code, order, start/stop/abort).
-- [ ] **W3:** `Domain` metrics (route efficiency, wrong turn, route change, jitter) with EditMode tests. Logger v1.
-- [ ] **W4:** Author S1–S3 with matched optimal path lengths (±15%). S2 node trigger. Hazard blocking and push-back. 5-minute cap.
-- [ ] **W4:** Voice-latency calibration (clap test ×20). Legibility and 72 Hz check on device.
-- [ ] **W5:** **Internal pilot with team members only** (allowed before approval as long as it is unpublished). Tune speed and comfort, then freeze metric definitions (§5.6) and the build.
+### Build: Blueprint 10-week dependency order
+
+| Week | Dates | Objective | Exit criterion |
+| --- | --- | --- | --- |
+| 1 | 28 Sep–4 Oct | Freeze RQs, primary outcomes, role boundaries. **Write the 3 scenario specs (Appendix B).** Unity 6 project, repo, pinned packages. | No open design question that changes the architecture |
+| 2 | 5–11 Oct | PC server + 2 Quests on the dedicated router, roles from the console. **Voice spike starts (D6).** | Two users connect reliably with the correct roles |
+| 3 | 12–18 Oct | Responder locomotion + grey-box facility + practice area | A comfortable full-map traverse |
+| 4 | 19–25 Oct | Analyst control room: map, sensors, alerts, zone marker | Analyst sees the intended global info in real time |
+| 5 | 26 Oct–1 Nov | Voice + recording + frame timing + VAD. EventLogger v1. `Domain` metric tests. | Audio works and events are saved with timestamps |
+| 6 | 2–8 Nov | S1 + TrialController end to end + trial summary. **Internal team pilot.** | One complete trial from start to saved summary |
+| 7 | 9–15 Nov | S2 waypoint trigger + S3 route logic + reset | All three scenarios work and reset |
+| 8 | 16–22 Nov | Experiment configuration, schedule, data export, printed questionnaire packets, voice calibration | A full session produces correctly linked datasets |
+| 9 | 23–29 Nov | Pilot with 2–3 pairs, then fixes | Protocol completes without major failures, and the reconstruct-the-story test passes |
+| 10 | 30 Nov–6 Dec | Freeze and version the build, write the session script, start formal data collection (if IREC-approved) | Frozen build + finalized script |
+
+IREC approval (expected mid to late October) arrives well before W10, so there is no blocking dependency. **If the course deadline (Q2) is before mid-December**, compress by building S2 and S3 in parallel in W6 (two people), and pilot in W8.
 
 ### Study operations
-- [ ] Printed questionnaire packets per pair (TLX ×3 + communication ×3 per participant)
-- [ ] Pre-generated counterbalance and role list (§6.3). Code log sheet kept in the locked cabinet (7E428).
-- [ ] Session run sheet and discomfort/adverse-event log template
+- [ ] Pre-generated role and order schedule (§6.3). Code log sheet kept in the locked cabinet (7E428).
+- [ ] Printed packets: background, TLX ×3, communication ×3, SUS, feedback per participant
+- [ ] Session script, restart/invalid rules, adverse-event log template
 - [ ] Recruitment only **after the approval letter**. Zhandaulet is the listed contact.
-- [ ] Data collection: about 4–5 pairs per week to reach 18 pairs
-- [ ] Audio coding (§6.5) with double-coding for κ, then analysis (§6.6), report, and presentation
+- [ ] Data collection: about 4 pairs per week, which gives 15 pairs in 4 weeks
+- [ ] Audio coding + κ, then analysis (§6.6), report, presentation
 
 ---
 
 ## 9. Open questions for Dr. Arif
 
-1. **Analyst's view of the Responder:** is a zone-level marker acceptable, or should the Analyst have no position information (D9)?
-2. **Course deadline:** when are the final report and demo due? This decides whether the analysis can cover all 18 pairs or only a first batch.
-3. Is the adaptive-uncertainty idea expected for the course grade? If so, it should be an amendment after approval, not part of this build.
-4. Can we use a separate room or partition in or near 7.522 for acoustic separation? Does the PI have a preferred router or network?
-5. Budget for a paid voice asset (Dissonance) if the spike needs it?
-6. Should a later amendment switch to electronic (offline, in-lab) questionnaires, or do we stay on paper?
+1. **Analyst's view of the Responder:** zone-level marker, no position, or live position (D9)? The Blueprint leaves it open.
+2. **Course deadline** for the report and demo. This decides whether to compress the timeline.
+3. Is the adaptive-uncertainty idea expected for the course grade? If so, it should be an amendment after approval.
+4. Can we use a partition or an adjacent room for acoustic separation? Preferred router or network?
+5. Budget for a paid voice asset if the custom relay spike fails?
+6. May the 2–3 pilot pairs be non-team volunteers before IREC approval, as long as the pilot is unpublished?

@@ -1,6 +1,6 @@
 # Team 2: Assets, Open-Source Components & References Requirements
 
-**Companion to:** [team2_final_plan_irec_aligned.md](team2_final_plan_irec_aligned.md)
+**Companion to:** [team2_final_plan_irec_aligned.md](team2_final_plan_irec_aligned.md) and the Team Blueprint (`Team_2_.../Collaborative_Fire_Emergency_VR_Project_Blueprint.md`, §8 Environment)
 **Written:** 25 Sep 2026
 **Purpose:** Define **what** we must build, find, or cite, and the acceptance criteria for each. The search itself is **not** done here. Whoever searches fills in the "Found" columns and the attribution log.
 
@@ -52,6 +52,9 @@ We build this ourselves. We do not search for a ready-made building, because the
 | L8 | Zone volumes (rooms and corridor segments), node triggers, hazard trigger volumes, and exit triggers are authored as invisible objects with IDs that match the scenario data |
 | L9 | A top-down **map is generated from the same geometry**, using an orthographic render or vector export, so the Analyst's map always matches the facility variant |
 | L10 | Physical sensor props (smoke detectors, heat sensors) placed in the world use the **same IDs** as the Analyst's sensor icons |
+| L11 | **S3 central junction** with three route mouths. Route A shows smoke at its entrance that is visible from the junction (Responder-only knowledge). Route C looks clear from the junction, but its blockage is **around a corner and out of sight** (Analyst-only knowledge, shown on the map). Route B is visibly open and longer. |
+| L12 | **S2 waypoint Wₖ** sits on the initially safe route, far enough before the new hazard (≥ 8 m) that a timely redirect is possible without entering it |
+| L13 | Three **layout variants** (rotated or reconfigured) of the same shell, one per scenario, plus a separate practice area. No accidental shortcuts: every variant is checked for unintended paths during the pilot. |
 
 ---
 
@@ -166,7 +169,7 @@ Each candidate must meet the criteria in the right column. Names in "Leads" are 
 
 | ID | Need | Must-have criteria | Leads to check |
 | --- | --- | --- | --- |
-| OS1 | **LAN voice chat** on Quest 2 with NGO | Works **offline on LAN**. Android/Quest build. Exposes the recorded or received audio stream so the server can write WAV. Low latency (< 150 ms mouth-to-ear on LAN). Active in 2025–26. | Dissonance Voice Chat (paid), UniVoice (open source), Concentus (C# Opus port) for a custom relay, Meta Platform voice samples |
+| OS1 | **LAN voice chat** on Quest 2 with NGO | Works **offline on LAN**. Android/Quest build. **Per-frame sequence ID + send/receive/playback timestamps accessible** (plan D6). The server can write WAV. Supports always-on mic + VAD. Low latency (< 150 ms mouth-to-ear on LAN). Active in 2025–26. | Dissonance Voice Chat (paid), UniVoice (open source), Concentus (C# Opus port) for a custom relay, Meta Platform voice samples |
 | OS2 | Multiplayer VR scaffold | Unity 6 + NGO 2.x + XRI 3.x. Dedicated-server or custom-role spawning possible. | Unity VR Multiplayer Template, Meta `oculus-samples` NGO projects, UCL Ubiq (only if we drop NGO, which is unlikely) |
 | OS3 | Continuous locomotion + vignette | Built-in and tunable | XRI `ContinuousMoveProvider` + `TunnelingVignetteController` (already in XRI) |
 | OS4 | Grey-boxing | Free, in-editor | Unity ProBuilder |
@@ -214,7 +217,7 @@ These are the claims our report and IREC text make, and each one needs support. 
 
 ---
 
-## 7. Acceptance checklist before the pilot (W5)
+## 7. Acceptance checklist before the pilot pairs (build W9)
 
 - [ ] Every imported item is in `assets/ATTRIBUTION.csv` with a compatible licence (R1–R3)
 - [ ] The Facility scene holds 72 Hz on Quest 2 at the worst viewpoint of each scenario, with smoke active (R7)
