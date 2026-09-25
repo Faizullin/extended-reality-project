@@ -1,6 +1,6 @@
 # CONFIDENTIALITY AGREEMENT
 
-**Title of Research Project:** Adaptive Uncertainty Visualization for Collaborative Emergency Decision-Making in Virtual Reality
+**Title of Research Project:** Collaborative Fire-Evacuation Decision-Making in Virtual Reality: Analyst-Responder Communication, Navigation, and Workload
 
 ---
 

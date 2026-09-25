@@ -64,15 +64,30 @@ The Blueprint's RQs are a finer breakdown of the IREC RQs, so **no amendment is 
 
 ## 2. Problems found in the submission package
 
-### 2.1 Critical: fix before IREC reviews it or returns it
+**Status update (25 Sep 2026, revised package received):** the updated `.docx`/`.doc` files replaced the originals in `Team_2_.../`:
+- `Consent Forms/Arif_Participant consent-Eng_09222026.docx` was rewritten.
+- `Consent Forms/Arif_Confidentiality Agreement Form-Eng_09222026.doc` has the title fixed.
+- `Consent Forms/Arif_Audio Recording Consent-Eng_09252026.docx` is **new**. It is a separate audio consent form with an explicit AGREE / DO NOT AGREE choice, and declining means no participation.
+- The IREC application `.docx` in the update was **byte-identical** to the original, so nothing in it changed.
 
-| # | Document | Problem | Fix |
+### 2.1 Critical
+
+| # | Document | Problem | Status |
 | --- | --- | --- | --- |
-| E1 | Participant consent | **It describes the old study.** Its title is "Adaptive Uncertainty Visualization…", it lists private/always-shared/adaptive conditions, a four-decision task, teleportation, and trust/shared-awareness/overload questionnaires. | Rewrite it to match the IREC application (see §7.1) |
-| E2 | Participant consent | It says "**Audio and video of participants will not be recorded**", but the IREC application (8.1, 8.2), the recruitment email, and the Team Blueprint all say audio **is** recorded. IREC 8.2 also says the consent form asks permission to record, and it does not. | Say audio is recorded and add an explicit checkbox for audio-recording consent |
-| E3 | Participant consent | Duration is 35–45 min where the IREC says 50–60 min. Location is "designated VR laboratory" where the IREC says Room 7.522. It says teleportation instead of continuous locomotion. | Align duration, location, and locomotion wording, and state the higher risk of motion sickness |
-| E4 | Instruments | The **custom communication-quality questionnaire is not in the submission**, although the application promises it after every scenario | Format the 7 Blueprint items (§6.4) as `Arif_Communication Quality Questionnaire-Eng_<date>` and submit it |
-| E5 | Confidentiality agreement | It carries the old study title | Change it to the IREC title |
+| E1 | Participant consent | It described the old adaptive-uncertainty study | ✅ **Fixed.** It now has the IREC title, three fire scenarios, continuous locomotion, and TLX + communication questionnaire + SUS. |
+| E2 | Participant consent | It said audio would **not** be recorded | ✅ **Fixed.** Audio recording is described, there is an audio checkbox in the participant consent, and there is a separate Audio Recording Consent form. |
+| E3 | Participant consent | Wrong duration, location, and locomotion | ✅ **Fixed.** It now says 50–60 min, Room 7.522, and continuous locomotion with the motion-sickness risk stated. |
+| E4 | Instruments | The **custom communication-quality questionnaire is still missing** | ❌ **Open.** Format the 7 Blueprint items (§6.4) as `Arif_Communication Quality Questionnaire-Eng_<date>` and submit it. |
+| E5 | Confidentiality agreement | Old study title | ✅ **Fixed** |
+
+### 2.1b New observations on the revised package
+
+| # | Where | Observation | Action |
+| --- | --- | --- | --- |
+| N1 | IREC application | It is unchanged, so it does not list the new **Audio Recording Consent** form. The submission checklist names only "Consent form(s)". | Mention the added form in the cover email to IREC. Optionally add a line in Part 8.2 / Part 9. |
+| N2 | Participant consent | It says "The **Responder** will use a Meta Quest 2 headset" and says nothing about the Analyst's device. The IREC says **two** Quest 2 headsets. It is not wrong, but it is ambiguous. | Keep D4 (Analyst in Quest 2). If the PI prefers a PC Analyst, the IREC text would need to change instead. **Ask the PI (Q7).** |
+| N3 | `Team_2_.../*.md` mirrors | `Arif_Participant consent-Eng_09222026.md` and `Arif_Confidentiality Agreement Form-Eng_09222026.md` still contain the **old** text. The Audio Consent form has no `.md` mirror. | Regenerate the `.md` mirrors from the new `.docx` files, or delete them. **The `.docx`/`.doc` files are authoritative.** |
+| N4 | Two audio consents | Audio consent is now given twice, as a checkbox and as a separate form. That is consistent, but operationally a single "DO NOT AGREE" ends the pair's session. | Run-sheet rule in §6.2 |
 
 ### 2.2 Minor: fix in the same revision
 
@@ -86,7 +101,9 @@ The Blueprint's RQs are a finer breakdown of the IREC RQs, so **no amendment is 
 | M6 | SUS / Feedback | SUS has no Pair Code. Add it. |
 | M7 | NASA-TLX | Says "after each experimental **condition**". Change it to "**scenario**". |
 
-**Action:** Send the PI one revision pack (E1–E5, M1–M7) this week.
+M1–M7 are **all still open**, because the instruments and the IREC application were not in the revised package.
+
+**Action:** Send the PI a second, smaller pack this week: E4 (communication questionnaire), M1–M7, N1, and N3.
 
 ---
 
@@ -112,7 +129,7 @@ The Blueprint's RQs are a finer breakdown of the IREC RQs, so **no amendment is 
 | D1 | **Build exactly the IREC and Blueprint study.** Three scenarios, fixed roles, communication-focused metrics. | Anything else needs an amendment |
 | D2 | **The adaptive-uncertainty study becomes future work** (amendment or new protocol) | The IREC and Blueprint both say a causal communication study needs a separate manipulation |
 | D3 | **Uncertainty survives as fixed content.** The Analyst's sensor panel always shows sensor age and status. In S3, one sensor is stale and the Responder's local view contradicts it. | Matches Blueprint S3: "the Analyst may benefit from the Responder's local observations" |
-| D4 | **Topology: the experimenter PC is a dedicated server** (not a player), with both Quests as clients | One authoritative clock, as the Blueprint requires. All logs and audio live on one machine. Roles are set from the console. |
+| D4 | **Topology: the experimenter PC is a dedicated server** (not a player), with both Quests as clients | One authoritative clock, as the Blueprint requires. All logs and audio live on one machine. Roles are set from the console. If the PI chooses a PC Analyst (Q7), only the Analyst client changes. The server design stays the same. |
 | D5 | **Use a dedicated offline Wi-Fi router**, not NU campus Wi-Fi | Campus Wi-Fi commonly isolates clients from each other. Latency is repeatable. |
 | D6 | **The voice stack must expose per-frame sequence ID + send timestamp + receive/playback timestamp** (Blueprint §11). Two paths are spiked in W1–W2: (a) a custom Opus/PCM relay over our networking layer, or (b) a LAN voice library with packet hooks. Choose the one that meets this criterion. If neither meets it, fall back to ping probes (§5.4). Cloud voice is ruled out (D5). | Frame-level timing is the Blueprint's intended metric |
 | D7 | **Separate the participants acoustically**: a partition or separate corners, with wired over-ear headphones on each Quest | If they can hear each other directly, the channel metrics mean nothing |
@@ -235,7 +252,7 @@ Coded IDs only. No names are ever typed into the system.
 
 | Stage | Time |
 | --- | --- |
-| Welcome, screening, consent (including the audio checkbox), codes, role from the schedule, background questionnaire | 5–8 |
+| Welcome, screening, **participant consent + Audio Recording Consent** (both participants), codes, role from the schedule, background questionnaire | 5–8 |
 | Role-specific tutorial (Analyst: map and sensors. Responder: movement.) | 5 |
 | Practice trial (verify movement + voice) | 4–6 |
 | Scenario A → headset off, TLX + communication questionnaire, rest | 5–8 + 3–5 |
@@ -246,6 +263,7 @@ Coded IDs only. No names are ever typed into the system.
 ### 6.2 Physical setup & researcher rules
 - Partition or maximum separation in 7.522. Wired over-ear headphones. A clear Responder area of at least 2×2 m with a swivel chair. One researcher watches each participant.
 - Use the written script for all instructions. **No coaching during trials.**
+- **Audio-consent rule:** collect both consent forms from **both** participants before anyone puts on a headset. If either one selects "DO NOT AGREE", the session does not start. Thank both, and offer the consenting participant a new slot with a different partner. Nothing is recorded for that pair. The recruitment message and scheduling reply must say clearly that audio recording is required, so that this rarely happens on the day.
 - **Restart rule:** a technical failure (disconnect, crash, voice loss > 10 s) in the first 60 s means restart with the same scenario. After that, mark the trial `invalid_trial` and continue. A participant's discomfort stop ends the session. Log it as `adverse_discomfort` and follow the IREC adverse-event procedure.
 
 ### 6.3 Counterbalancing (D13)
@@ -303,19 +321,22 @@ Score = mean after reversing the *(R)* items. Also report per item, because the 
 
 **Cut:** interface conditions, adaptive cue engine, bifurcated path rays, cellular-automata fire, crouch/soot/cough/O₂, SAGAT, Muir trust, in-VR questionnaires, UXF, PC tabletop Analyst, teleportation, four-decision scoring, NPC workers.
 
-### 7.1 Rewritten consent form: required contents
-Include: IREC title; Room 7.522; 50–60 min; pairs with fixed randomly assigned roles, both in Quest 2; practice + three fire-evacuation scenarios; continuous locomotion with its motion-sickness risk and mitigations; **audio of the voice channel recorded, stored under codes, never published, deleted after the retention period**; automatic logs (path, times, route events, voice and network timing); questionnaires (background, NASA-TLX + communication quality after each scenario, SUS + feedback at the end). Keep: no video or biometrics, voluntary participation, withdrawal and data-removal rules, contacts. Add a checkbox: "I agree to audio recording of my communication during the VR tasks (required for participation)."
+### 7.1 Consent forms: done
+The revised participant consent and the new Audio Recording Consent (25 Sep 2026) cover everything this section used to require. The one remaining gap is N2 (the Analyst's device is not stated).
 
 ---
 
 ## 8. TODO
 
 ### Ethics revision pack (week of 28 Sep)
-- [ ] Rewrite the participant consent form (E1–E3, §7.1)
+- [x] Rewrite the participant consent form (E1–E3). Done 25 Sep 2026.
+- [x] Add audio-recording consent. Done: checkbox + separate form.
+- [x] Fix the confidentiality agreement title (E5). Done 25 Sep 2026.
 - [ ] Format the Communication Quality Questionnaire from the Blueprint items (E4, §6.4)
-- [ ] Fix the confidentiality agreement title (E5)
 - [ ] Screening checklist, background additions, SUS Pair Code, TLX wording (M4–M7)
 - [ ] Rename instrument files with `-Eng`. Fix §4.4 wording. PI fills in the CITI date and NU ID (M1–M3).
+- [ ] Mention the new Audio Recording Consent form to IREC (N1)
+- [ ] Regenerate or delete the stale `.md` mirrors of the consent forms (N3)
 - [ ] Send the pack to Dr. Arif for forwarding to resethics@nu.edu.kz. Ask the questions in §9.
 
 ### Build: Blueprint 10-week dependency order
@@ -353,3 +374,4 @@ IREC approval (expected mid to late October) arrives well before W10, so there i
 4. Can we use a partition or an adjacent room for acoustic separation? Preferred router or network?
 5. Budget for a paid voice asset if the custom relay spike fails?
 6. May the 2–3 pilot pairs be non-team volunteers before IREC approval, as long as the pilot is unpublished?
+7. The revised consent names a headset only for the Responder. Is the Analyst also in a Quest 2, as the IREC says and D4 assumes, or on a PC screen (N2)?
